@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.paragraph {
+  @apply text-sm p-6;
+}
+
+.page-container {
+  @apply block h-screen p-4 w-[80%] md:w-[50%] lg:w-[30%] m-auto text-center  md:border rounded-md;
+}
+
+.alert-box {
+  font-size: 12px;
+  padding: 0.5rem;
+  transition: 0.5s;
+  font-weight: 700;
+}
+
+.page-container {
+  max-width: 800px;
+}
+
+.img-div {
+  @apply hidden w-[40%] md:block;
+}
+
+.title {
+  @apply text-2xl font-bold my-6;
+}
+
+label {
+  @apply block text-left my-4 text-gray-600;
+}
+
+input {
+  @apply w-full block text-left my-4 border-b focus:outline-none text-sm;
+  background-color: white;
+}
+input::placeholder {
+  transition: all 0.3s;
+}
+
+.btn-grad {
+  background-image: linear-gradient(
+    to right,
+    #000000 0%,
+    #333435 51%,
+    #232526 100%
+  );
+  padding: 15px 45px;
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+  width: 100%;
+}
+
+.btn-grad:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+}
+
+input:focus::placeholder {
+  font-size: 10px;
+  transition: 0.5s;
+}
+
+.google-button {
+  @apply p-2 flex justify-center items-center gap-2 w-[75%] mx-auto border cursor-pointer border-black rounded-md;
+}
+
+.google-button img {
+  width: 20px;
+  height: 20px;
+}
+
+.action-paragraph {
+  margin-top: 60px;
+  font-size: small;
+}
