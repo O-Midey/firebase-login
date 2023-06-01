@@ -12,9 +12,8 @@ const successAlertStyle = {
 };
 
 const failedAlertStyle = {
-  display: "block",
+  ...successAlertStyle,
   backgroundColor: "rgb(254, 6, 12)",
-  transition: "0.5s",
 };
 
 export const SignUp = () => {
@@ -24,8 +23,8 @@ export const SignUp = () => {
   const [password, setPassword] = useState("");
   const [alertMessage, setAlertMessage] = useState("some text");
   const [alertStyle, setAlertStyle] = useState({ opacity: 0 });
-  const [user, setUser] = useState(null);
 
+  const { user, setUser, createUser, createUserWithGoogle } = UserAuth();
   //useEffect to check logout the user whenever page loads.
   useEffect(() => {
     signOut(auth);
@@ -72,7 +71,7 @@ export const SignUp = () => {
   };
 
   // Register new user with email and password
-  const { createUser, createUserWithGoogle } = UserAuth();
+
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {

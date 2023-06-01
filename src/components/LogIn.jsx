@@ -1,6 +1,7 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UserAuth } from "../context/AuthContext";
+import { auth } from "../Config/Config";
 
 const successAlertStyle = {
   display: "block",
@@ -15,29 +16,33 @@ const failedAlertStyle = {
 };
 
 export const LogIn = () => {
-  const [email, setUserName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alertMessage, setAlertMessage] = useState("some text");
   const [alertStyle, setAlertStyle] = useState({ opacity: 0 });
 
-  const hideAlert = () => {
-    setTimeout(() => {
-      setAlertStyle({ opacity: 0 });
-    }, 5000);
-  };
-
-  const logIn = async () => {
+  const { logIn, createUserWithGoogle, user, setUser } = UserAuth();
+  const navigate = useNavigate();
+  const logInUser = async () => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      setAlertStyle({ ...successAlertStyle });
-      setAlertMessage("Account created successfully, proceed to sign in");
-      hideAlert();
+      await logIn(email, password);
+      navigate("/home");
+      console.log(user);
     } catch (err) {
       console.error(err);
       setAlertStyle({ ...failedAlertStyle });
       setAlertMessage(err.message);
-      hideAlert();
     }
+  };
+
+  const handleSignUpWithGoogle = async (e) => {
+    e.preventDefault();
+    try {
+      await createUserWithGoogle();
+    } catch (error) {
+      console.error(error.message);
+    }
+    if (auth.currentUser) navigate("/home");
   };
 
   return (
@@ -49,9 +54,9 @@ export const LogIn = () => {
         <div>
           <div className="main-content">
             <h3 className="title">Log In</h3>
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">Email</label>
             <input
-              onChange={(e) => setUserName(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               type="text"
               name="username"
               placeholder="Enter username here"
@@ -67,11 +72,11 @@ export const LogIn = () => {
               <a href="">Forgot Password?</a>
             </p>
           </div>
-          <button onClick={logIn} className="btn-grad">
+          <button onClick={logInUser} className="btn-grad">
             Log In
           </button>
           <p className="paragraph">or</p>
-          <div className="google-button">
+          <div onClick={handleSignUpWithGoogle} className="google-button">
             <img src="https://cdn-icons-png.flaticon.com/512/281/281764.png?w=740&t=st=1685483357~exp=1685483957~hmac=5ae1de4ed32b3cce5da318215438245e823f5c48a57d894f92ba2eb0bae5ea41" />
             <p>Sign in with google</p>
           </div>
