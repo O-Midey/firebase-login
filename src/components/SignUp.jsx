@@ -5,20 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 
 //styles for the alert box
-const successAlertStyle = {
-  display: "block",
-  backgroundColor: "rgba(9, 219, 9, 0.486)",
-  transition: "0.5s",
-};
-
 const failedAlertStyle = {
-  ...successAlertStyle,
+  display: "block",
+  transition: "0.5s",
   backgroundColor: "rgb(254, 6, 12)",
 };
 
 export const SignUp = () => {
   //states
-
   const [email, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [alertMessage, setAlertMessage] = useState("some text");
@@ -39,18 +33,6 @@ export const SignUp = () => {
 
   //useNavigate function.
   const navigate = useNavigate();
-
-  //useEffect to listen if a user is signed in.
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-
-    // Clean up the listener when the component unmounts
-    return () => {
-      unsubscribe();
-    };
-  }, []);
 
   //Function to direct a user home if signed in.
   if (user) navigate("/home");
@@ -105,18 +87,18 @@ export const SignUp = () => {
         <div>
           <div className="main-content">
             <h3 className="title">Sign Up</h3>
-            <label htmlFor="name">Name</label>
+            <label>Name</label>
             <input type="email" name="email" placeholder="Jane Doe" />
-            <label htmlFor="email">Email</label>
+            <label>Email</label>
             <input
               onChange={(e) => setUserName(e.target.value)}
               type="email"
               name="email"
               placeholder="test@test.com"
             />
-            <label htmlFor="username">Username</label>
+            <label>Username</label>
             <input type="text" name="username" placeholder="meedzy" />
-            <label htmlFor="password">Password</label>
+            <label>Password</label>
             <input
               onChange={(e) => setPassword(e.target.value)}
               type="password"

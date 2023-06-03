@@ -3,12 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 import { auth } from "../Config/Config";
 
-const successAlertStyle = {
-  display: "block",
-  backgroundColor: "rgba(9, 219, 9, 0.486)",
-  transition: "0.5s",
-};
-
 const failedAlertStyle = {
   display: "block",
   backgroundColor: "rgb(254, 6, 12)",
@@ -27,7 +21,6 @@ export const LogIn = () => {
     try {
       await logIn(email, password);
       navigate("/home");
-      console.log(user);
     } catch (err) {
       console.error(err);
       setAlertStyle({ ...failedAlertStyle });
@@ -54,14 +47,14 @@ export const LogIn = () => {
         <div>
           <div className="main-content">
             <h3 className="title">Log In</h3>
-            <label htmlFor="username">Email</label>
+            <label>Email</label>
             <input
               onChange={(e) => setEmail(e.target.value)}
               type="text"
               name="username"
               placeholder="Enter username here"
             />
-            <label htmlFor="password">Password</label>
+            <label>Password</label>
             <input
               onChange={(e) => setPassword(e.target.value)}
               type="password"
