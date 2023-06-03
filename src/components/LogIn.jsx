@@ -34,10 +34,10 @@ export const LogIn = ({ failedAlertStyle }) => {
 
   return (
     <div>
-      <div className="alert-box" style={alertStyle}>
-        {alertMessage}
-      </div>
       <div className="page-container">
+        <div className="alert-box" style={alertStyle}>
+          {alertMessage}
+        </div>
         <div>
           <div className="main-content">
             <h3 className="title">Log In</h3>
