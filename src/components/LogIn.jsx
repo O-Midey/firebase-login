@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 import { auth } from "../Config/Config";
@@ -11,6 +11,14 @@ export const LogIn = ({ failedAlertStyle }) => {
 
   const { logIn, createUserWithGoogle, user, setUser } = UserAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/home");
+    }
+    return;
+  }, [user]);
+
   const logInUser = async () => {
     try {
       await logIn(email, password);
@@ -22,14 +30,13 @@ export const LogIn = ({ failedAlertStyle }) => {
     }
   };
 
-  const handleSignUpWithGoogle = async (e) => {
+  const handleSignIWithGoogle = async (e) => {
     e.preventDefault();
     try {
       await createUserWithGoogle();
     } catch (error) {
       console.error(error.message);
     }
-    if (auth.currentUser) navigate("/home");
   };
 
   return (
@@ -63,7 +70,7 @@ export const LogIn = ({ failedAlertStyle }) => {
             Log In
           </button>
           <p className="paragraph">or</p>
-          <div onClick={handleSignUpWithGoogle} className="google-button">
+          <div onClick={handleSignIWithGoogle} className="google-button">
             <img src="https://cdn-icons-png.flaticon.com/512/281/281764.png?w=740&t=st=1685483357~exp=1685483957~hmac=5ae1de4ed32b3cce5da318215438245e823f5c48a57d894f92ba2eb0bae5ea41" />
             <p>Sign in with google</p>
           </div>

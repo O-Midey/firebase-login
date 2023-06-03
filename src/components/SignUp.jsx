@@ -11,11 +11,19 @@ export const SignUp = ({ failedAlertStyle }) => {
   const [alertMessage, setAlertMessage] = useState("");
   const [alertStyle, setAlertStyle] = useState({ opacity: 0 });
 
-  const { createUser, createUserWithGoogle } = UserAuth();
+  const { user, createUser, createUserWithGoogle } = UserAuth();
   //useEffect to check logout the user whenever page loads.
   useEffect(() => {
     signOut(auth);
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      navigate("/home");
+    }
+
+    return;
+  }, [user]);
 
   //function to hide the alertbox.
   const hideAlert = () => {
@@ -59,12 +67,12 @@ export const SignUp = ({ failedAlertStyle }) => {
     e.preventDefault();
     try {
       await createUserWithGoogle();
-      console.log(auth.currentUser);
+      successfullyCreated();
     } catch (error) {
       console.error(error.message);
       notSuccessfullyCreated(error.message);
     }
-    if (auth.currentUser) navigate("/home");
+    if (user) navigate("/home");
   };
 
   return (
