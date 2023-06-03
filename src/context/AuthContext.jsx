@@ -14,7 +14,6 @@ export const AuthContextProvider = ({ children }) => {
 
   //useEffect to listen if a user is signed in.
   useEffect(() => {
-    console.log(user);
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });

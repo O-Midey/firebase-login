@@ -16,10 +16,14 @@
 }
 
 .page-container {
-  @apply block h-screen p-4 w-[80%] md:w-[50%] lg:w-[30%] m-auto text-center  md:border rounded-md;
+  @apply relative block h-screen p-4 w-[80%] md:w-[50%] lg:w-[30%] m-auto text-center  md:border rounded-md;
 }
 
 .alert-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
   font-size: 12px;
   padding: 0.5rem;
   transition: 0.5s;

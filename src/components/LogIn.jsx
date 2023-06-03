@@ -3,13 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 import { auth } from "../Config/Config";
 
-const failedAlertStyle = {
-  display: "block",
-  backgroundColor: "rgb(254, 6, 12)",
-  transition: "0.5s",
-};
-
-export const LogIn = () => {
+export const LogIn = ({ failedAlertStyle }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alertMessage, setAlertMessage] = useState("some text");
@@ -40,10 +34,10 @@ export const LogIn = () => {
 
   return (
     <div>
+      <div className="alert-box" style={alertStyle}>
+        {alertMessage}
+      </div>
       <div className="page-container">
-        <div className="alert-box" style={alertStyle}>
-          {alertMessage}
-        </div>
         <div>
           <div className="main-content">
             <h3 className="title">Log In</h3>

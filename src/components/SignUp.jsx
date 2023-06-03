@@ -4,21 +4,14 @@ import { auth } from "../Config/Config";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 
-//styles for the alert box
-const failedAlertStyle = {
-  display: "block",
-  transition: "0.5s",
-  backgroundColor: "rgb(254, 6, 12)",
-};
-
-export const SignUp = () => {
+export const SignUp = ({ failedAlertStyle }) => {
   //states
   const [email, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [alertMessage, setAlertMessage] = useState("some text");
+  const [alertMessage, setAlertMessage] = useState("");
   const [alertStyle, setAlertStyle] = useState({ opacity: 0 });
 
-  const { user, setUser, createUser, createUserWithGoogle } = UserAuth();
+  const { createUser, createUserWithGoogle } = UserAuth();
   //useEffect to check logout the user whenever page loads.
   useEffect(() => {
     signOut(auth);
@@ -34,12 +27,8 @@ export const SignUp = () => {
   //useNavigate function.
   const navigate = useNavigate();
 
-  //Function to direct a user home if signed in.
-  if (user) navigate("/home");
-
   // Functions to run when account is successfully created.
   const successfullyCreated = () => {
-    setAlertStyle({ ...successAlertStyle });
     setAlertMessage("Account created successfully, proceed to sign in");
     navigate("/home");
     hideAlert();
